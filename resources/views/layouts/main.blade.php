@@ -7,7 +7,7 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js']);
     <title>Laravel App</title>
 </head>
-<body class="bg-secondary">
+<body class="bg-light">
     <div class="container">
         @yield('content')
     </div>

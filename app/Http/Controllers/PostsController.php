@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateRequest;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
@@ -20,14 +21,9 @@ class PostsController extends Controller
         return view('post.create',compact('categories'));
     }
 
-    public function store()
+    public function store(CreateRequest $request)
     {
-        $data = request()->validate([
-            'title'=>'required|string',
-            'description'=>'required|string',
-            'category_id'=>'required|numeric'
-        ]);
-
+        $data = $request->validated();
         Post::create($data);
         return redirect()->route('post.index');
     }
