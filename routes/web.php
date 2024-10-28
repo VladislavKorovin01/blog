@@ -7,13 +7,16 @@ Route::get('/', function(){
     return redirect()->route('post.index');
 });
 
+Route::controller(PostsController::class)->prefix('/posts')->group(function(){
+    Route::get('','index')->name('post.index');
+    Route::get('/create','create')->name('post.create');
+    Route::post('','store')->name('post.store');
+    Route::get('/edit','edit')->name('post.edit');
+    Route::get('/{post}','show')->name('post.show');
+    Route::get('/{post}/edit','edit')->name('post.edit');
+    Route::patch('/{post}','update')->name('post.update');
+    Route::delete('/{post}','destroy')->name('post.delete');
+});
 
-Route::get('/posts',[PostsController::class,'index'])->name('post.index');
-Route::get('/posts/create',[PostsController::class,'create'])->name('post.create');
-Route::post('/posts',[PostsController::class,'store'])->name('post.store');
 
-Route::get('/posts/edit',[PostsController::class,'edit'])->name('post.edit');
-Route::get('/posts/{post}',[PostsController::class,'show'])->name('post.show');
-Route::get('/posts/{post}/edit',[PostsController::class,'edit'])->name('post.edit');
-Route::patch('/posts/{post}',[PostsController::class,'update'])->name('post.update');
-Route::delete('/posts/{post}',[PostsController::class,'destroy'])->name('post.delete');
+
